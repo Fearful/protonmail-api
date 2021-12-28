@@ -1,0 +1,49 @@
+{
+  "name": "protonmail-api",
+  "version": "2.2.0",
+  "description": "Node.js API for ProtonMail",
+  "repository": "github:justinkalland/protonmail-api",
+  "homepage": "https://github.com/justinkalland/protonmail-api#readme",
+  "bugs": {
+    "url": "https://github.com/justinkalland/protonmail-api/issues"
+  },
+  "author": "Justin Kalland <justin@kalland.com>",
+  "license": "MIT",
+  "types": "./types.d.ts",
+  "scripts": {
+    "test": "mocha tests --recursive --timeout 30000",
+    "lint": "eslint . || true",
+    "jsdoc": "jsdoc -c .jsdoc.json",
+    "validate": "run-s test lint",
+    "prerelease": "git checkout master && git pull origin master && run-s validate jsdoc",
+    "release": "standard-version",
+    "prepublishOnly": "npm run test"
+  },
+  "dependencies": {
+    "puppeteer": "^10.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.4",
+    "@commitlint/config-conventional": "^12.1.4",
+    "chai": "^4.3.4",
+    "docdash": "github:clenemt/docdash",
+    "dotenv": "^10.0.0",
+    "eslint-config-jk": "^1.6.0",
+    "jsdoc": "^3.6.4",
+    "mocha": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "standard-version": "^9.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "eslintConfig": {
+    "extends": "jk"
+  }
+}
